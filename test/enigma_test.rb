@@ -9,3 +9,4 @@ class EnigmaTest < Minitest::Test
 
     assert_instance_of Enigma, enigma
   end
+end
