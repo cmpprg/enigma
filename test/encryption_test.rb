@@ -9,7 +9,12 @@ class EncryptionTest < Minitest::Test
   end
 
   def test_it_exists
-    assert_instance_of Encryption, encryption
+    assert_instance_of Encryption, @encryption
   end
 
+  def test_it_has_attributes
+    assert_equal "hello world", @encryption.message
+    assert_equal "02715", @encryption.key
+    assert_equal "040895", @encryption.date
+  end
 end
