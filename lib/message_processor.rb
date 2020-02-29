@@ -39,6 +39,10 @@ class MessageProcessor
         new_msg << char
       end
     end
-    @output_message = new_msg.join()
+    new_msg
+  end
+
+  def encrypt
+    @output_message = process_message.join
   end
 end

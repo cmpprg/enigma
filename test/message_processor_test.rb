@@ -51,9 +51,8 @@ class MessageProcessorTest < Minitest::Test
   end
 
   def test_it_can_encrypt_a_message
-
-    @message_processor.process_message
-    @message_processor2.process_message
+    @message_processor.encrypt
+    @message_processor2.encrypt
 
     assert_equal "keder ohulw", @message_processor.output_message
     assert_equal "keder1,tzojeg!@%^&*", @message_processor2.output_message
