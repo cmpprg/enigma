@@ -26,6 +26,11 @@ class DateProcessorTest < Minitest::Test
     assert_equal "44646844804", @date_processor2.square_date
   end
 
+  def test_it_can_capture_last_four_digits
+    assert_equal "1025", @date_processor1.last_four_digits
+    assert_equal "2804", @date_processor2.last_four_digits
+  end
+
   def test_it_can_process_the_date_into_offset_values
     @date_processor1.process_date
     @date_processor2.process_date
