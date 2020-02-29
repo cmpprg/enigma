@@ -17,4 +17,13 @@ class EncryptionTest < Minitest::Test
     assert_equal "02715", @encryption.key
     assert_equal "040895", @encryption.date
   end
+
+  def test_it_can_process_keys
+    expected = {a_key: 02,
+                b_key: 27,
+                c_key: 71,
+                d_key: 15}
+
+    assert_equal expected, @encryption.process_key("02715")
+  end
 end
