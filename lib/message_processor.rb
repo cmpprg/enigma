@@ -9,7 +9,6 @@ class MessageProcessor
     @key_shift_values = KeyProcessor.new(key).key_shift_values
     @offset_shift_values = DateProcessor.new(date).offset_shift_values
     @message = message.downcase
-    @is_decryption = false
     @output_message = ""
   end
 
@@ -27,14 +26,14 @@ class MessageProcessor
     string.tr(alphabet.to_s, alphabet.rotate(amount).to_s)
   end
 
-  def process_message
+  def process_message(shift_hash)
     new_msg = []
     split_message.each_with_index do |char, index|
       if @alphabet.include?(char)
-        new_msg << shift_input(char, total_shifts[:a]) if index % 4 == 0
-        new_msg << shift_input(char, total_shifts[:b]) if (index - 1) % 4 == 0
-        new_msg << shift_input(char, total_shifts[:c]) if (index - 2) % 4 == 0
-        new_msg << shift_input(char, total_shifts[:d]) if (index - 3) % 4 == 0
+        new_msg << shift_input(char, shift_hash[:a]) if index % 4 == 0
+        new_msg << shift_input(char, shift_hash[:b]) if (index - 1) % 4 == 0
+        new_msg << shift_input(char, shift_hash[:c]) if (index - 2) % 4 == 0
+        new_msg << shift_input(char, shift_hash[:d]) if (index - 3) % 4 == 0
       else
         new_msg << char
       end
@@ -43,6 +42,14 @@ class MessageProcessor
   end
 
   def encrypt
-    @output_message = process_message.join
+    @output_message = process_message(total_shifts).join
+  end
+
+  def decrypt
+    negative_total_shifts = total_shifts.transform_values do |value|
+      value * -1
+    end
+
+    @output_message = process_message(negative_total_shifts).join
   end
 end
