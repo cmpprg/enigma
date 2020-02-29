@@ -22,11 +22,11 @@ class MessageProcessorTest < Minitest::Test
 
     expected2 = {a: 2, b: 27, c: 71, d: 15}
 
-    assert_equal expected2, @message_processor.key_hash_values
+    assert_equal expected2, @message_processor.key_shift_values
 
     expected3 = {a:1, b:0, c:2, d:5}
 
-    assert_equal expected3, @message_processor.offset_hash_values
+    assert_equal expected3, @message_processor.offset_shift_values
     assert_equal "hello world", @message_processor.message
   end
 end
