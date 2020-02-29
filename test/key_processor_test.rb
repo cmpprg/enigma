@@ -1,4 +1,4 @@
-require "simplecov"
+require "./test/test_helper"
 require "minitest/autorun"
 require "minitest/pride"
 require "./lib/key_processor"
