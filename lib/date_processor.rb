@@ -9,9 +9,11 @@ class DateProcessor
     @offset_shift_values = {}
   end
 
-  def process_date
-    square_date = (input_date.to_i ** 2).to_s
+  def square_date
+    (input_date.to_i ** 2).to_s
+  end
 
+  def process_date
     last_four_nums = square_date[-4, 4]
 
     split_four_nums = last_four_nums.split("")

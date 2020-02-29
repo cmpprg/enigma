@@ -21,6 +21,11 @@ class DateProcessorTest < Minitest::Test
     assert_equal ({}), @date_processor1.offset_shift_values
   end
 
+  def test_it_can_square_the_input_date
+    assert_equal "1672401025", @date_processor1.square_date
+    assert_equal "44646844804", @date_processor2.square_date
+  end
+
   def test_it_can_process_the_date_into_offset_values
     @date_processor1.process_date
     @date_processor2.process_date
