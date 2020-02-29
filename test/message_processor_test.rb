@@ -57,4 +57,12 @@ class MessageProcessorTest < Minitest::Test
     assert_equal "keder ohulw", @message_processor.output_message
     assert_equal "keder1,tzojeg!@%^&*", @message_processor2.output_message
   end
+
+  def test_it_can_decrypt_a_message
+    message_processor = MessageProcessor.new("keder ohulw", "02715", "040895")
+    message_processor2 = MessageProcessor.new("keder1,tzojeg!@%^&*", "02715", "040895")
+
+    assert_equal "hello world", message_processor.decrypt
+    assert_equal "hello1, world!@%^&*", message_processor2.decrypt
+  end
 end
