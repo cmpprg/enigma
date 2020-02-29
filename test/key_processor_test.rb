@@ -18,6 +18,10 @@ class KeyProcessorTest < Minitest::Test
     assert_equal 0, @key_processor.counter
   end
 
+  def test_it_can_split_the_key_input_into_an_array
+    assert_equal ["0", "2", "7", "1", "5"], @key_processor.split_input
+  end
+
   def test_it_can_process_key
     expected = {a: 2,
                 b: 27,
