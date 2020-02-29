@@ -19,10 +19,10 @@ class EncryptionTest < Minitest::Test
   end
 
   def test_it_can_process_keys
-    expected = {a_key: 02,
-                b_key: 27,
-                c_key: 71,
-                d_key: 15}
+    expected = {a: 02,
+                b: 27,
+                c: 71,
+                d: 15}
 
     assert_equal expected, @encryption.process_key("02715")
   end
