@@ -18,9 +18,7 @@ class DateProcessor
   end
 
   def process_date
-    last_four_nums = square_date[-4, 4]
-
-    split_four_nums = last_four_nums.split("")
+    split_four_nums = last_four_digits.split("")
 
     x = split_four_nums.each do |num|
       @offset_shift_values[@offset_shift_keys[@counter].to_sym] = num.to_i

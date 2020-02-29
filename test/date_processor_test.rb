@@ -31,6 +31,11 @@ class DateProcessorTest < Minitest::Test
     assert_equal "4804", @date_processor2.last_four_digits
   end
 
+  def test_it_can_split_last_four_digits_into_array
+    assert_equal ["1", "0", "2", "5"], @date_processor1.split_digits
+    assert_equal ["4", "8", "0", "4"], @date_processor1.split_digits
+  end
+
   def test_it_can_process_the_date_into_offset_values
     @date_processor1.process_date
     @date_processor2.process_date
