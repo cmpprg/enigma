@@ -10,6 +10,6 @@ class DateProcessorTest < Minitest::Test
   end
 
   def test_it_exists
-    assert_instance_of DateProcessor, date_processor
+    assert_instance_of DateProcessor, @date_processor
   end
 end
