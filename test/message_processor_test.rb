@@ -39,6 +39,12 @@ class MessageProcessorTest < Minitest::Test
     assert_equal expected, @message_processor.total_shift_values
   end
 
+  def test_it_can_split_input_message_into_array
+    expected = ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
+
+    assert_equal expected, @message_processor.split_message
+  end
+
   def test_it_can_encrypt_a_message
 
     @message_processor.process_message

@@ -19,9 +19,12 @@ class MessageProcessor
     end
   end
 
-  def process_message
-    split_message = message.split("")
+  def split_message
+    message.split("")
+  end
 
+  def process_message
+    
     new_message = []
     split_message.each_with_index do |letter, index|
       if @alphabet.include?(letter)
