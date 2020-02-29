@@ -28,5 +28,7 @@ class MessageProcessorTest < Minitest::Test
 
     assert_equal expected3, @message_processor.offset_shift_values
     assert_equal "hello world", @message_processor.message
+    assert_equal false, @message_processor.is_decryption
   end
+
 end
