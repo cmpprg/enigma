@@ -6,24 +6,28 @@ require "./lib/date_processor"
 class DateProcessorTest < Minitest::Test
 
   def setup
-    @date_processor = DateProcessor.new("040895")
+    @date_processor1 = DateProcessor.new("040895")
+    @date_processor2 = DateProcessor.new("211298")
   end
 
   def test_it_exists
-    assert_instance_of DateProcessor, @date_processor
+    assert_instance_of DateProcessor, @date_processor1
   end
 
   def test_it_has_attributes
-    assert_equal "040895", @date_processor.input_date
-    assert_equal "abcd", @date_processor.offset_shift_keys
-    assert_equal 0, @date_processor.counter
-    assert_equal ({}), @date_processor.offset_shift_values
+    assert_equal "040895", @date_processor1.input_date
+    assert_equal "abcd", @date_processor1.offset_shift_keys
+    assert_equal 0, @date_processor1.counter
+    assert_equal ({}), @date_processor1.offset_shift_values
   end
 
   def test_it_can_process_the_date_into_offset_values
-    @date_processor.process_date
-    expected = {a:1, b:0, c:2, d:5}
+    @date_processor1.process_date
+    @date_processor2.process_date
+    expected1 = {a:1, b:0, c:2, d:5}
+    expected2 = {a:4, b:8, c:0, d:4}
 
-    assert_equal expected, @date_processor.offset_shift_values
+    assert_equal expected1, @date_processor1.offset_shift_values
+    assert_equal expected2, @date_processor2.offset_shift_values
   end
 end
