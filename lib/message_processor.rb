@@ -28,24 +28,17 @@ class MessageProcessor
   end
 
   def process_message
-
-    new_message = []
-    split_message.each_with_index do |letter, index|
-      if @alphabet.include?(letter)
-        if index % 4 == 0
-          new_message << shift_input(letter, total_shifts[:a])
-        elsif (index - 1) % 4 == 0
-          new_message << shift_input(letter, total_shifts[:b])
-        elsif (index - 2) % 4 == 0
-          new_message << shift_input(letter, total_shifts[:c])
-        elsif (index - 3) % 4 == 0
-          new_message << shifgt_input(letter, total_shifts[:d])
-        end
+    new_msg = []
+    split_message.each_with_index do |char, index|
+      if @alphabet.include?(char)
+        new_msg << shift_input(char, total_shifts[:a]) if index % 4 == 0
+        new_msg << shift_input(char, total_shifts[:b]) if (index - 1) % 4 == 0
+        new_msg << shift_input(char, total_shifts[:c]) if (index - 2) % 4 == 0
+        new_msg << shift_input(char, total_shifts[:d]) if (index - 3) % 4 == 0
       else
-        new_message << letter
+        new_msg << char
       end
     end
-
-    @output_message = new_message.join()
+    @output_message = new_msg.join()
   end
 end
