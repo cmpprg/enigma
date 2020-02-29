@@ -19,4 +19,11 @@ class DateProcessorTest < Minitest::Test
     assert_equal 0, @date_processor.counter
     assert_equal ({}), @date_processor.offset_shift_values
   end
+
+  def test_it_can_process_the_date_into_offset_values
+    @date_processor.process_date
+    expected = {a:1, b:0, c:2, d:5}
+
+    assert_equal expected, @date_processor.offset_shift_values
+  end
 end
