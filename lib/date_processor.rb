@@ -13,6 +13,10 @@ class DateProcessor
     (input_date.to_i ** 2).to_s
   end
 
+  def last_four_digits
+    square_date[-4, 4]
+  end
+
   def process_date
     last_four_nums = square_date[-4, 4]
 
