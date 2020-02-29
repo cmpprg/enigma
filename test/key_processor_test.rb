@@ -16,6 +16,7 @@ class KeyProcessorTest < Minitest::Test
     assert_equal "02715", @key_processor.input_key
     assert_equal "abcd", @key_processor.key_categories
     assert_equal 0, @key_processor.counter
+    assert_equal {}, @key_processor.key_shift_values
   end
 
   def test_it_can_split_the_key_input_into_an_array

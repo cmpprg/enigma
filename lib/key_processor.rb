@@ -3,8 +3,9 @@ class KeyProcessor
   attr_reader :input_key, :key_categories, :counter
   def initialize(input_key)
     @input_key = input_key
-    @key_categories = "abcd"
+    @key_shift_keys = "abcd"
     @counter = 0
+    @key_shift_values = {}
   end
 
   def split_input
@@ -12,11 +13,9 @@ class KeyProcessor
   end
 
   def process_key
-    key_shift = {}
     split_input.each_cons(2) do |pair|
-      key_shift[key_categories[@counter].to_sym] = pair.join.to_i
+      key_shift_values[@key_shift_keys[@counter].to_sym] = pair.join.to_i
       @counter += 1
     end
-    key_shift
   end
 end
