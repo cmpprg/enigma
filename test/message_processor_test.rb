@@ -33,16 +33,21 @@ class MessageProcessorTest < Minitest::Test
     assert_equal "", @message_processor.output_message
   end
 
-  def test_it_can_find_total_shift_values
+  def test_it_can_find_total_shifts
     expected = {:a=>3, :b=>27, :c=>73, :d=>20}
 
-    assert_equal expected, @message_processor.total_shift_values
+    assert_equal expected, @message_processor.total_shifts
   end
 
   def test_it_can_split_input_message_into_array
     expected = ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
 
     assert_equal expected, @message_processor.split_message
+  end
+
+  def test_it_can_shift_a_string_input_by_an_amount
+    assert_equal "bcd", @message_processor.shift_input("abc", 1)
+    assert_equal "qrs", @message_processor.shift_input("abc", 16)
   end
 
   def test_it_can_encrypt_a_message

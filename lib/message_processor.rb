@@ -13,7 +13,7 @@ class MessageProcessor
     @output_message = ""
   end
 
-  def total_shift_values
+  def total_shifts
     key_shift_values.merge(offset_shift_values) do |keys, key_val, offset_val|
       key_val + offset_val
     end
@@ -23,19 +23,23 @@ class MessageProcessor
     message.split("")
   end
 
+  def shift_input(string, amount)
+    string.tr(alphabet.to_s, alphabet.rotate(amount).to_s)
+  end
+
   def process_message
-    
+
     new_message = []
     split_message.each_with_index do |letter, index|
       if @alphabet.include?(letter)
         if index % 4 == 0
-          new_message << letter.tr(alphabet.to_s, alphabet.rotate(total_shift_values[:a]).to_s)
+          new_message << shift_input(letter, total_shifts[:a])
         elsif (index - 1) % 4 == 0
-          new_message << letter.tr(alphabet.to_s, alphabet.rotate(total_shift_values[:b]).to_s)
+          new_message << shift_input(letter, total_shifts[:b])
         elsif (index - 2) % 4 == 0
-          new_message << letter.tr(alphabet.to_s, alphabet.rotate(total_shift_values[:c]).to_s)
+          new_message << shift_input(letter, total_shifts[:c])
         elsif (index - 3) % 4 == 0
-          new_message << letter.tr(alphabet.to_s, alphabet.rotate(total_shift_values[:d]).to_s)
+          new_message << shifgt_input(letter, total_shifts[:d])
         end
       else
         new_message << letter
