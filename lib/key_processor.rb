@@ -6,6 +6,7 @@ class KeyProcessor
     @key_shift_keys = "abcd"
     @counter = 0
     @key_shift_values = {}
+    process_key
   end
 
   def split_input

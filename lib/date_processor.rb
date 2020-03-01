@@ -7,6 +7,7 @@ class DateProcessor
     @offset_shift_keys = "abcd"
     @counter = 0
     @offset_shift_values = {}
+    process_date
   end
 
   def square_date
