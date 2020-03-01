@@ -42,5 +42,3 @@ class Enigma
     output_hash(decrypted_message, key, date, :decryption)
   end
 end
-
-#Use Date.strptime("mmddyy", ("%m%d%y")) for validation
