@@ -32,17 +32,20 @@ class EnigmaTest < Minitest::Test
 
   def test_it_can_decrypt_a_message
     expected = {
-                encryption: "hello world",
+                decryption: "hello world",
                 key: "02715",
                 date: "040895"
                 }
 
     expected2 = {
-                encryption: "hello1, world!@%^&*",
+                decryption: "hello1, world!@%^&*",
                 key: "02715",
                 date: "040895"
                 }
     decrypt = @enigma.decrypt("keder ohulw", "02715", "040895")
-    decrypt = @enigma.decrypt("keder1,tzojeg!@%^&*", "02715", "040895")
+    decrypt2 = @enigma.decrypt("keder1,tzojeg!@%^&*", "02715", "040895")
+
+    assert_equal expected, decrypt
+    assert_equal expected2, decrypt2
   end
 end

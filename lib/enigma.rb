@@ -11,4 +11,14 @@ class Enigma
     }
 
   end
+
+  def decrypt(ciphertext, key, date)
+    decrypted_message = MessageProcessor.new(ciphertext, key, date).decrypt
+
+    output_hash = {
+      decryption: decrypted_message,
+      key: key,
+      date: date
+    }
+  end
 end
