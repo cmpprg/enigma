@@ -9,6 +9,10 @@ class Enigma
     (0..9).to_a.sample(5).shuffle.join
   end
 
+  def todays_date
+    Date.today.strftime("%d%m%y")
+  end
+
   def encrypt(input_message, key, date)
     encrypted_message = MessageProcessor.new(input_message, key, date).encrypt
     output_hash(encrypted_message, key, date)

@@ -1,6 +1,7 @@
 require "./test/test_helper"
 require "minitest/autorun"
 require "minitest/pride"
+require "mocha/minitest"
 require "./lib/enigma"
 
 class EnigmaTest < Minitest::Test
@@ -38,6 +39,11 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Integer, @enigma.random_number[2].to_i
     assert_instance_of Integer, @enigma.random_number[3].to_i
     assert_instance_of Integer, @enigma.random_number[4].to_i
+  end
+
+  def test_that_it_can_put_gather_todays_date_in_ddmmyy_format
+    Date.stubs(:today).returns(Date.new(2020, 02, 29))
+    assert_equal "290220", @enigma.todays_date
   end
 
   def test_it_can_encrypt_a_message
