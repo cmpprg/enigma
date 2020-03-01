@@ -19,7 +19,7 @@ class KeyProcessor
     end
   end
 
-  def ouput_key_values
+  def output_key_values
     process_key
     @key_shift_values
   end

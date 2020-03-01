@@ -28,7 +28,7 @@ class DateProcessor
     end
   end
 
-  def output_key_values
+  def output_offset_values
     process_date
     @offset_shift_values
   end
