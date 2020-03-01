@@ -46,6 +46,20 @@ class EnigmaTest < Minitest::Test
     assert_equal "290220", @enigma.todays_date
   end
 
+  def test_it_can_validate_date_input
+    good_input1 = "300388"
+    bad_input2 = "320388"
+    bad_input3 = "301388"
+    bad_input4 = "301S88"
+    bad_input5 = "30388"
+
+    assert_equal true, @enigma.valid_date?(good_input1)
+    assert_equal false, @enigma.valid_date?(bad_input2)
+    assert_equal false, @enigma.valid_date?(bad_input3)
+    assert_equal false, @enigma.valid_date?(bad_input4)
+    assert_equal false, @enigma.valid_date?(bad_input5)
+  end
+
   def test_it_can_encrypt_a_message
     expected = {
                 encryption: "keder ohulw",
@@ -108,5 +122,4 @@ class EnigmaTest < Minitest::Test
 
     assert_equal expected, @enigma.encrypt("hello world")
   end
-
 end
