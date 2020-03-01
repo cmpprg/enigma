@@ -19,8 +19,30 @@ class EnigmaTest < Minitest::Test
                 key: "02715",
                 date: "040895"
                 }
-    encrypt = @enigma.encrypt("hello world", "02715", "040895")
 
+    expected2 = {
+                encryption: "keder1,tzojeg!@%^&*",
+                key: "02715",
+                date: "040895"
+                }
+    encrypt = @enigma.encrypt("hello world", "02715", "040895")
+    encrypt2 = @enigma.encrypt("hello1, world!@%^&*", "02715", "040895")
     assert_equal expected, encrypt
+  end
+
+  def test_it_can_decrypt_a_message
+    expected = {
+                encryption: "hello world",
+                key: "02715",
+                date: "040895"
+                }
+
+    expected2 = {
+                encryption: "hello1, world!@%^&*",
+                key: "02715",
+                date: "040895"
+                }
+    decrypt = @enigma.decrypt("keder ohulw", "02715", "040895")
+    decrypt = @enigma.decrypt("keder1,tzojeg!@%^&*", "02715", "040895")
   end
 end
