@@ -26,6 +26,10 @@ class Enigma
     true
   end
 
+  def valid_inputs?(message, key, date)
+    message.class == String && valid_date?(date) && valid_key?(key)
+  end
+
   def encrypt(input_message, key = random_number, date = todays_date)
     encrypted_message = MessageProcessor.new(input_message, key, date).encrypt
     output_hash(encrypted_message, key, date)

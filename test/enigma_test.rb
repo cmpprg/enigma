@@ -76,6 +76,16 @@ class EnigmaTest < Minitest::Test
     assert_equal false, @enigma.valid_key?(bad_input5)
   end
 
+  def test_it_can_validate_inputs
+    assert_equal true, @enigma.valid_inputs?("Hello", "12345", "121212")
+    assert_equal false, @enigma.valid_inputs?(:Hello, "12345", "121212")
+    assert_equal false, @enigma.valid_inputs?("Hello", "1234", "121212")
+    assert_equal false, @enigma.valid_inputs?("Hello", "12345", "1121212")
+    assert_equal false, @enigma.valid_inputs?("Hello", "12345", "12121S")
+    assert_equal false, @enigma.valid_inputs?("Hello", "1S345", "12121")
+    assert_equal false, @enigma.valid_inputs?(true, "12345", "121212")
+  end
+
   def test_it_can_encrypt_a_message
     expected = {
                 encryption: "keder ohulw",
