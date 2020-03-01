@@ -47,17 +47,33 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_validate_date_input
-    good_input1 = "300388"
+    good_input = "300388"
     bad_input2 = "320388"
     bad_input3 = "301388"
     bad_input4 = "301S88"
     bad_input5 = "30388"
+    bad_input6 = "3003$8"
 
-    assert_equal true, @enigma.valid_date?(good_input1)
+    assert_equal true, @enigma.valid_date?(good_input)
     assert_equal false, @enigma.valid_date?(bad_input2)
     assert_equal false, @enigma.valid_date?(bad_input3)
     assert_equal false, @enigma.valid_date?(bad_input4)
     assert_equal false, @enigma.valid_date?(bad_input5)
+    assert_equal false, @enigma.valid_date?(bad_input6)
+  end
+
+  def test_it_can_validate_key_input
+    good_input = "07896"
+    bad_input2 = "0789"
+    bad_input3 = "078961"
+    bad_input4 = "07S96"
+    bad_input5 = "$7896"
+
+    assert_equal true, @enigma.valid_key?(good_input)
+    assert_equal false, @enigma.valid_key?(bad_input2)
+    assert_equal false, @enigma.valid_key?(bad_input3)
+    assert_equal false, @enigma.valid_key?(bad_input4)
+    assert_equal false, @enigma.valid_key?(bad_input5)
   end
 
   def test_it_can_encrypt_a_message

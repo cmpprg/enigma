@@ -20,6 +20,12 @@ class Enigma
     Date.valid_date?("20#{date[-2,2]}".to_i,date[2,2].to_i, date[0,2].to_i)
   end
 
+  def valid_key?(key)
+    return false unless key.length == 5
+    return false unless key.split("").all?{ |num| ("0".."9").include?(num)}
+    true
+  end
+
   def encrypt(input_message, key = random_number, date = todays_date)
     encrypted_message = MessageProcessor.new(input_message, key, date).encrypt
     output_hash(encrypted_message, key, date)
