@@ -14,7 +14,7 @@ class Enigma
     Date.today.strftime("%d%m%y")
   end
 
-  def encrypt(input_message, key, date = todays_date)
+  def encrypt(input_message, key = random_number, date = todays_date)
     encrypted_message = MessageProcessor.new(input_message, key, date).encrypt
     output_hash(encrypted_message, key, date)
   end

@@ -100,4 +100,13 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.decrypt("lib sdmcvpu", "02715")
   end
 
+  def test_it_can_use_random_number_and_todays_date_as_defults_for_encrypt
+    @enigma.stubs(:todays_date).returns("010320")
+    @enigma.stubs(:random_number).returns("08351")
+
+    expected = {encryption: "rktiyfdlarl", key: "08351", date: "010320"}
+
+    assert_equal expected, @enigma.encrypt("hello world")
+  end
+
 end
