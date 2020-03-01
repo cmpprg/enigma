@@ -100,9 +100,11 @@ class EnigmaTest < Minitest::Test
                 }
     encrypt = @enigma.encrypt("hello world", "02715", "040895")
     encrypt2 = @enigma.encrypt("hello1, world!@%^&*", "02715", "040895")
+    encrypt3 = @enigma.encrypt(false, "02715", "040895")
 
     assert_equal expected, encrypt
     assert_equal expected2, encrypt2
+    assert_equal "Invalid Input", encrypt3
   end
 
   def test_it_can_decrypt_a_message
@@ -119,9 +121,11 @@ class EnigmaTest < Minitest::Test
                 }
     decrypt = @enigma.decrypt("keder ohulw", "02715", "040895")
     decrypt2 = @enigma.decrypt("keder1,tzojeg!@%^&*", "02715", "040895")
+    decrypt3 = @enigma.decrypt("keder1,tzojeg!@%^&*", "0S715", "040895")
 
     assert_equal expected, decrypt
     assert_equal expected2, decrypt2
+    assert_equal "Invalid Input", decrypt3
   end
 
   def test_it_can_use_default_todays_date_for_encryption

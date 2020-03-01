@@ -31,11 +31,13 @@ class Enigma
   end
 
   def encrypt(input_message, key = random_number, date = todays_date)
+    return "Invalid Input" if !valid_inputs?(input_message, key, date)
     encrypted_message = MessageProcessor.new(input_message, key, date).encrypt
     output_hash(encrypted_message, key, date)
   end
 
   def decrypt(ciphertext, key, date = todays_date)
+    return "Invalid Input" if !valid_inputs?(ciphertext, key, date)
     decrypted_message = MessageProcessor.new(ciphertext, key, date).decrypt
     output_hash(decrypted_message, key, date, :decryption)
   end
