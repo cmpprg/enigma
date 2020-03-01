@@ -7,7 +7,6 @@ class DateProcessor
     @offset_shift_keys = "abcd"
     @counter = 0
     @offset_shift_values = {}
-    process_date
   end
 
   def square_date
@@ -27,5 +26,10 @@ class DateProcessor
       @offset_shift_values[@offset_shift_keys[@counter].to_sym] = num.to_i
       @counter += 1
     end
+  end
+
+  def output_offset_values
+    process_date
+    @offset_shift_values
   end
 end

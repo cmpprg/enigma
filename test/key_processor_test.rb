@@ -33,4 +33,13 @@ class KeyProcessorTest < Minitest::Test
 
     assert_equal expected, @key_processor.key_shift_values
   end
+
+  def test_it_can_process_key_and_output_key_values
+    expected = {a: 2,
+                b: 27,
+                c: 71,
+                d: 15}
+
+    assert_equal expected, @key_processor.output_key_values
+  end
 end

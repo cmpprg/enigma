@@ -6,7 +6,6 @@ class KeyProcessor
     @key_shift_keys = "abcd"
     @counter = 0
     @key_shift_values = {}
-    process_key
   end
 
   def split_input
@@ -18,5 +17,10 @@ class KeyProcessor
       @key_shift_values[@key_shift_keys[@counter].to_sym] = pair.join.to_i
       @counter += 1
     end
+  end
+
+  def output_key_values
+    process_key
+    @key_shift_values
   end
 end
