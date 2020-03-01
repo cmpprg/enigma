@@ -30,6 +30,16 @@ class EnigmaTest < Minitest::Test
     assert_equal expected2, @enigma.output_hash("whatever", "12345", "76543", :decryption)
   end
 
+  def test_it_can_generate_random_five_digit_number
+    assert_equal 5, @enigma.random_number.length
+    assert_instance_of String, @enigma.random_number
+    assert_instance_of Integer, @enigma.random_number[0].to_i
+    assert_instance_of Integer, @enigma.random_number[1].to_i
+    assert_instance_of Integer, @enigma.random_number[2].to_i
+    assert_instance_of Integer, @enigma.random_number[3].to_i
+    assert_instance_of Integer, @enigma.random_number[4].to_i
+  end
+
   def test_it_can_encrypt_a_message
     expected = {
                 encryption: "keder ohulw",
