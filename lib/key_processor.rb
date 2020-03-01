@@ -18,4 +18,9 @@ class KeyProcessor
       @counter += 1
     end
   end
+
+  def ouput_key_values
+    process_key
+    @key_shift_values
+  end
 end
