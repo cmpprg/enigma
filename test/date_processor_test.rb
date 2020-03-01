@@ -45,4 +45,12 @@ class DateProcessorTest < Minitest::Test
     assert_equal expected1, @date_processor1.offset_shift_values
     assert_equal expected2, @date_processor2.offset_shift_values
   end
+
+  def test_it_can_run_entire_processing_and_output_offset_values
+    expected1 = {a:1, b:0, c:2, d:5}
+    expected2 = {a:4, b:8, c:0, d:4}
+
+    assert_equal expected1, @date_processor1.output_offset_values
+    assert_equal expected2, @date_processor2.output_offset_values
+  end
 end
