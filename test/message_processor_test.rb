@@ -29,11 +29,23 @@ class MessageProcessorTest < Minitest::Test
 
     assert_equal expected3, @message_processor.offset_shift_values
     assert_equal "hello world", @message_processor.message
+    assert_equal false, @message_processor.is_decryption
     assert_equal "", @message_processor.output_message
   end
 
-  def test_it_can_find_total_shifts
+  def test_it_can_check_if_its_decryption
+    assert_equal false, @message_processor.is_decryption?
+  end
+
+  def test_it_can_calculate_total_shifts
     expected = {:a=>3, :b=>27, :c=>73, :d=>20}
+
+    assert_equal expected, @message_processor.total_shifts
+  end
+
+  def test_it_can_calculate_negative_total_shifts_for_decrypt
+    expected = {:a=>-3, :b=>-27, :c=>-73, :d=>-20}
+    @message_processor.set_decryption
 
     assert_equal expected, @message_processor.total_shifts
   end
@@ -50,11 +62,16 @@ class MessageProcessorTest < Minitest::Test
   end
 
   def test_it_can_encrypt_a_message
-    @message_processor.encrypt
-    @message_processor2.encrypt
+    assert_equal "keder ohulw", @message_processor.encrypt
+    assert_equal "keder1,tzojeg!@%^&*", @message_processor2.encrypt
+  end
 
-    assert_equal "keder ohulw", @message_processor.output_message
-    assert_equal "keder1,tzojeg!@%^&*", @message_processor2.output_message
+  def test_it_can_set_is_decryption_to_true
+    assert_equal false, @message_processor.is_decryption?
+
+    @message_processor.set_decryption
+
+    assert_equal true, @message_processor.is_decryption?
   end
 
   def test_it_can_decrypt_a_message
