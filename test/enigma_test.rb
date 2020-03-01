@@ -34,11 +34,11 @@ class EnigmaTest < Minitest::Test
   def test_it_can_generate_random_five_digit_number
     assert_equal 5, @enigma.random_number.length
     assert_instance_of String, @enigma.random_number
-    assert_instance_of Integer, @enigma.random_number[0].to_i
-    assert_instance_of Integer, @enigma.random_number[1].to_i
-    assert_instance_of Integer, @enigma.random_number[2].to_i
-    assert_instance_of Integer, @enigma.random_number[3].to_i
-    assert_instance_of Integer, @enigma.random_number[4].to_i
+    assert_equal true, ("0".."9").include?(@enigma.random_number[0])
+    assert_equal true, ("0".."9").include?(@enigma.random_number[1])
+    assert_equal true, ("0".."9").include?(@enigma.random_number[2])
+    assert_equal true, ("0".."9").include?(@enigma.random_number[3])
+    assert_equal true, ("0".."9").include?(@enigma.random_number[4])
   end
 
   def test_that_it_can_put_gather_todays_date_in_ddmmyy_format
@@ -83,4 +83,21 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, decrypt
     assert_equal expected2, decrypt2
   end
+
+  def test_it_can_use_default_todays_date_for_encryption
+    @enigma.stubs(:todays_date).returns("010320")
+
+    expected = {encryption: "lib sdmcvpu", key: "02715", date: "010320"}
+
+    assert_equal expected, @enigma.encrypt("hello world", "02715")
+  end
+
+  def test_it_can_use_default_todays_date_for_decryption
+    @enigma.stubs(:todays_date).returns("010320")
+
+    expected = {decryption: "hello world", key: "02715", date: "010320"}
+
+    assert_equal expected, @enigma.decrypt("lib sdmcvpu", "02715")
+  end
+
 end
