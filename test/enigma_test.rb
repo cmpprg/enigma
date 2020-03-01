@@ -16,18 +16,18 @@ class EnigmaTest < Minitest::Test
   def test_it_can_build_output_hash
     expected = {
                 encryption: "whatever",
-                key: "123456",
+                key: "12345",
                 date: "76543"
                 }
 
     expected2 = {
                 decryption: "whatever",
-                key: "123456",
+                key: "12345",
                 date: "76543"
                 }
 
-    assert_equal expected, @enigma.output_hash("whatever", "123456", "76543")
-    assert_equal expected2, @enigma.output_hash("whatever", "123456", "76543", :decryption)
+    assert_equal expected, @enigma.output_hash("whatever", "12345", "76543")
+    assert_equal expected2, @enigma.output_hash("whatever", "12345", "76543", :decryption)
   end
 
   def test_it_can_encrypt_a_message
