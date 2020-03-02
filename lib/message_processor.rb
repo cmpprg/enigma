@@ -3,14 +3,13 @@ require "./lib/date_processor"
 class MessageProcessor
 
   attr_reader :alphabet, :key_shift_values, :offset_shift_values,
-              :message, :is_decryption, :output_message
+              :message, :is_decryption
   def initialize(message, key, date)
-    @alphabet = ("a".."z").to_a << " "
+    @alphabet = [*"a".."z"] << " "
     @key_shift_values = KeyProcessor.new(key).process_key
     @offset_shift_values = DateProcessor.new(date).process_date
     @message = message
     @is_decryption = false
-    @output_message = ""
   end
 
   def is_decryption?
@@ -51,7 +50,7 @@ class MessageProcessor
   end
 
   def encrypt
-    @output_message = process_message.join
+    process_message.join
   end
 
   def set_decryption
@@ -60,6 +59,6 @@ class MessageProcessor
 
   def decrypt
     set_decryption
-    @output_message = process_message.join
+    process_message.join
   end
 end
