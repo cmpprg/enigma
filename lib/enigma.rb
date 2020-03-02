@@ -30,10 +30,22 @@ class Enigma
     Date.today.strftime("%d%m%y")
   end
 
+  def year(date)
+    date[-2,2]
+  end
+
+  def month(date)
+    date[2,2]
+  end
+
+  def day(date)
+    date[0,2]
+  end
+
   def valid_date?(date)
     return false unless date.length == 6
     return false unless date.split("").all?{ |num| ("0".."9").include?(num)}
-    Date.valid_date?("20#{date[-2,2]}".to_i,date[2,2].to_i, date[0,2].to_i)
+    Date.valid_date?("20#{year(date)}".to_i, month(date).to_i, day(date).to_i)
   end
 
   def valid_key?(key)

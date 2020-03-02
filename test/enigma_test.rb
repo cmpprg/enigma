@@ -94,6 +94,18 @@ class EnigmaTest < Minitest::Test
     assert_equal "290220", @enigma.todays_date
   end
 
+  def test_it_can_return_the_year_in_ddmmyy
+    assert_equal "18", @enigma.year("111218")
+  end
+
+  def test_it_can_return_the_month_in_ddmmyy
+    assert_equal "12", @enigma.month("111218")
+  end
+
+  def test_it_can_return_the_day_in_ddmmyy
+    assert_equal "11", @enigma.day("111218")
+  end
+
   def test_it_can_validate_date_input
     good_input = "300388"
     bad_input2 = "320388"
