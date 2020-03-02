@@ -14,7 +14,7 @@ class KeyProcessorTest < Minitest::Test
 
   def test_it_has_attributes
     assert_equal "02715", @key_processor.input_key
-    assert_equal "abcd", @key_processor.key_shift_keys
+    assert_equal [:a, :b, :c, :d], @key_processor.keys
     assert_equal ({}), @key_processor.key_shift_values
   end
 
