@@ -5,7 +5,6 @@ class DateProcessor
   def initialize(input_date)
     @input_date = input_date
     @offset_shift_keys = "abcd"
-    @counter = 0
     @offset_shift_values = {}
   end
 
@@ -22,9 +21,8 @@ class DateProcessor
   end
 
   def process_date
-    split_digits.each do |num|
-      @offset_shift_values[@offset_shift_keys[@counter].to_sym] = num.to_i
-      @counter += 1
+    split_digits.each_with_index do |num, index|
+      @offset_shift_values[@offset_shift_keys[index].to_sym] = num.to_i
     end
   end
 

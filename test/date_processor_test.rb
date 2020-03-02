@@ -17,7 +17,6 @@ class DateProcessorTest < Minitest::Test
   def test_it_has_attributes
     assert_equal "040895", @date_processor1.input_date
     assert_equal "abcd", @date_processor1.offset_shift_keys
-    assert_equal 0, @date_processor1.counter
     assert_equal ({}), @date_processor1.offset_shift_values
   end
 
