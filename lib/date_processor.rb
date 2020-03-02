@@ -4,7 +4,6 @@ class DateProcessor
   def initialize(input_date)
     @input_date = input_date
     @offsets = "abcd".split("").map(&:to_sym)
-    @offset_shift_values = {}
   end
 
   def square_date
@@ -20,13 +19,9 @@ class DateProcessor
   end
 
   def process_date
-    split_digits.each_with_index do |num, index|
-      @offset_shift_values[@offsets[index]] = num.to_i
+    split_digits.each_with_object({}).with_index do |(num, hash), index|
+      hash[offsets[index]] = num.to_i
     end
   end
 
-  def output_offset_values
-    process_date
-    @offset_shift_values
-  end
 end
