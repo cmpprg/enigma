@@ -1,6 +1,6 @@
 class DateProcessor
 
-  attr_reader :input_date, :offsets, :offset_shift_values
+  attr_reader :input_date, :offsets
   def initialize(input_date)
     @input_date = input_date
     @offsets = [*"a".."d"].map(&:to_sym)

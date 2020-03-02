@@ -6,7 +6,7 @@ class MessageProcessor
               :message, :is_decryption, :output_message
   def initialize(message, key, date)
     @alphabet = ("a".."z").to_a << " "
-    @key_shift_values = KeyProcessor.new(key).output_key_values
+    @key_shift_values = KeyProcessor.new(key).process_key
     @offset_shift_values = DateProcessor.new(date).process_date
     @message = message
     @is_decryption = false
