@@ -3,13 +3,13 @@ require "./lib/message_processor"
 class Enigma
 
   def encrypt(input_message, key = random_five, date = todays_date)
-    return "Invalid Input" if !valid_inputs?(input_message, key, date)
+    return "Invalid Input" unless valid_inputs?(input_message, key, date)
     encrypted_message = MessageProcessor.new(input_message, key, date).encrypt
     output_hash(encrypted_message, key, date)
   end
 
   def decrypt(ciphertext, key, date = todays_date)
-    return "Invalid Input" if !valid_inputs?(ciphertext, key, date)
+    return "Invalid Input" unless valid_inputs?(ciphertext, key, date)
     decrypted_message = MessageProcessor.new(ciphertext, key, date).decrypt
     output_hash(decrypted_message, key, date, :decryption)
   end
