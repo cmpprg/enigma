@@ -35,18 +35,16 @@ class MessageProcessor
   end
 
   def process_message
-    new_msg = []
-    split_message.each_with_index do |char, index|
+    split_message.each_with_index.with_object([]) do |(char, index), new_msg|
       if @alphabet.include?(char)
         new_msg << shift_input(char, total_shifts[:a]) if index % 4 == 0
-        new_msg << shift_input(char, total_shifts[:b]) if (index - 1) % 4 == 0
-        new_msg << shift_input(char, total_shifts[:c]) if (index - 2) % 4 == 0
-        new_msg << shift_input(char, total_shifts[:d]) if (index - 3) % 4 == 0
+        new_msg << shift_input(char, total_shifts[:b]) if index % 4 == 1
+        new_msg << shift_input(char, total_shifts[:c]) if index % 4 == 2
+        new_msg << shift_input(char, total_shifts[:d]) if index % 4 == 3
       else
         new_msg << char
       end
     end
-    new_msg
   end
 
   def encrypt
