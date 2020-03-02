@@ -3,7 +3,7 @@ class DateProcessor
   attr_reader :input_date, :offsets, :offset_shift_values
   def initialize(input_date)
     @input_date = input_date
-    @offsets = "abcd".split("").map(&:to_sym)
+    @offsets = [*"a".."d"].map(&:to_sym)
   end
 
   def square_date
@@ -20,7 +20,7 @@ class DateProcessor
 
   def process_date
     split_digits.each_with_object({}).with_index do |(num, hash), index|
-      hash[offsets[index]] = num.to_i
+      hash[@offsets[index]] = num.to_i
     end
   end
 
