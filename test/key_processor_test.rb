@@ -14,32 +14,24 @@ class KeyProcessorTest < Minitest::Test
 
   def test_it_has_attributes
     assert_equal "02715", @key_processor.input_key
-    assert_equal "abcd", @key_processor.key_shift_keys
-    assert_equal 0, @key_processor.counter
-    assert_equal ({}), @key_processor.key_shift_values
+    assert_equal [:a, :b, :c, :d], @key_processor.keys
   end
 
   def test_it_can_split_the_key_input_into_an_array
     assert_equal ["0", "2", "7", "1", "5"], @key_processor.split_input
   end
 
-  def test_it_can_process_key
-    @key_processor.process_key
+  def test_it_can_create_an_array_of_pairs
+    assert_equal [02, 27, 71, 15], @key_processor.create_pairs
+  end
 
+  def test_it_can_process_key_and_output_hash
     expected = {a: 2,
                 b: 27,
                 c: 71,
                 d: 15}
 
-    assert_equal expected, @key_processor.key_shift_values
+    assert_equal expected, @key_processor.process_key
   end
 
-  def test_it_can_process_key_and_output_key_values
-    expected = {a: 2,
-                b: 27,
-                c: 71,
-                d: 15}
-
-    assert_equal expected, @key_processor.output_key_values
-  end
 end

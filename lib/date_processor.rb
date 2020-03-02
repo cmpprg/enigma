@@ -1,12 +1,9 @@
 class DateProcessor
 
-  attr_reader :input_date, :offset_shift_keys,
-              :counter, :offset_shift_values
+  attr_reader :input_date, :offset_keys
   def initialize(input_date)
     @input_date = input_date
-    @offset_shift_keys = "abcd"
-    @counter = 0
-    @offset_shift_values = {}
+    @offset_keys = [*"a".."d"].map(&:to_sym)
   end
 
   def square_date
@@ -21,15 +18,12 @@ class DateProcessor
     last_four_digits.split("")
   end
 
-  def process_date
-    split_digits.each do |num|
-      @offset_shift_values[@offset_shift_keys[@counter].to_sym] = num.to_i
-      @counter += 1
-    end
+  def offsets_to_integers
+    split_digits.map(&:to_i)
   end
 
-  def output_offset_values
-    process_date
-    @offset_shift_values
+  def process_date
+    @offset_keys.zip(offsets_to_integers).to_h
   end
+
 end

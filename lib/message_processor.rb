@@ -3,14 +3,13 @@ require "./lib/date_processor"
 class MessageProcessor
 
   attr_reader :alphabet, :key_shift_values, :offset_shift_values,
-              :message, :is_decryption, :output_message
+              :message, :is_decryption
   def initialize(message, key, date)
-    @alphabet = ("a".."z").to_a << " "
-    @key_shift_values = KeyProcessor.new(key).output_key_values
-    @offset_shift_values = DateProcessor.new(date).output_offset_values
+    @alphabet = [*"a".."z"] << " "
+    @key_shift_values = KeyProcessor.new(key).process_key
+    @offset_shift_values = DateProcessor.new(date).process_date
     @message = message
     @is_decryption = false
-    @output_message = ""
   end
 
   def is_decryption?
@@ -36,22 +35,20 @@ class MessageProcessor
   end
 
   def process_message
-    new_msg = []
-    split_message.each_with_index do |char, index|
+    split_message.each_with_index.with_object([]) do |(char, index), new_msg|
       if @alphabet.include?(char)
         new_msg << shift_input(char, total_shifts[:a]) if index % 4 == 0
-        new_msg << shift_input(char, total_shifts[:b]) if (index - 1) % 4 == 0
-        new_msg << shift_input(char, total_shifts[:c]) if (index - 2) % 4 == 0
-        new_msg << shift_input(char, total_shifts[:d]) if (index - 3) % 4 == 0
+        new_msg << shift_input(char, total_shifts[:b]) if index % 4 == 1
+        new_msg << shift_input(char, total_shifts[:c]) if index % 4 == 2
+        new_msg << shift_input(char, total_shifts[:d]) if index % 4 == 3
       else
         new_msg << char
       end
     end
-    new_msg
   end
 
   def encrypt
-    @output_message = process_message.join
+    process_message.join
   end
 
   def set_decryption
@@ -60,6 +57,6 @@ class MessageProcessor
 
   def decrypt
     set_decryption
-    @output_message = process_message.join
+    process_message.join
   end
 end

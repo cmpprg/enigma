@@ -14,78 +14,6 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, @enigma
   end
 
-  def test_it_can_build_output_hash
-    expected = {
-                encryption: "whatever",
-                key: "12345",
-                date: "76543"
-                }
-
-    expected2 = {
-                decryption: "whatever",
-                key: "12345",
-                date: "76543"
-                }
-
-    assert_equal expected, @enigma.output_hash("whatever", "12345", "76543")
-    assert_equal expected2, @enigma.output_hash("whatever", "12345", "76543", :decryption)
-  end
-
-  def test_it_can_generate_random_five_digit_number
-    assert_equal 5, @enigma.random_number.length
-    assert_instance_of String, @enigma.random_number
-    assert_equal true, ("0".."9").include?(@enigma.random_number[0])
-    assert_equal true, ("0".."9").include?(@enigma.random_number[1])
-    assert_equal true, ("0".."9").include?(@enigma.random_number[2])
-    assert_equal true, ("0".."9").include?(@enigma.random_number[3])
-    assert_equal true, ("0".."9").include?(@enigma.random_number[4])
-  end
-
-  def test_that_it_can_put_gather_todays_date_in_ddmmyy_format
-    Date.stubs(:today).returns(Date.new(2020, 02, 29))
-    assert_equal "290220", @enigma.todays_date
-  end
-
-  def test_it_can_validate_date_input
-    good_input = "300388"
-    bad_input2 = "320388"
-    bad_input3 = "301388"
-    bad_input4 = "301S88"
-    bad_input5 = "30388"
-    bad_input6 = "3003$8"
-
-    assert_equal true, @enigma.valid_date?(good_input)
-    assert_equal false, @enigma.valid_date?(bad_input2)
-    assert_equal false, @enigma.valid_date?(bad_input3)
-    assert_equal false, @enigma.valid_date?(bad_input4)
-    assert_equal false, @enigma.valid_date?(bad_input5)
-    assert_equal false, @enigma.valid_date?(bad_input6)
-  end
-
-  def test_it_can_validate_key_input
-    good_input = "07896"
-    bad_input2 = "0789"
-    bad_input3 = "078961"
-    bad_input4 = "07S96"
-    bad_input5 = "$7896"
-
-    assert_equal true, @enigma.valid_key?(good_input)
-    assert_equal false, @enigma.valid_key?(bad_input2)
-    assert_equal false, @enigma.valid_key?(bad_input3)
-    assert_equal false, @enigma.valid_key?(bad_input4)
-    assert_equal false, @enigma.valid_key?(bad_input5)
-  end
-
-  def test_it_can_validate_inputs
-    assert_equal true, @enigma.valid_inputs?("Hello", "12345", "121212")
-    assert_equal false, @enigma.valid_inputs?(:Hello, "12345", "121212")
-    assert_equal false, @enigma.valid_inputs?("Hello", "1234", "121212")
-    assert_equal false, @enigma.valid_inputs?("Hello", "12345", "1121212")
-    assert_equal false, @enigma.valid_inputs?("Hello", "12345", "12121S")
-    assert_equal false, @enigma.valid_inputs?("Hello", "1S345", "12121")
-    assert_equal false, @enigma.valid_inputs?(true, "12345", "121212")
-  end
-
   def test_it_can_encrypt_a_message
     expected = {
                 encryption: "keder ohulw",
@@ -128,6 +56,96 @@ class EnigmaTest < Minitest::Test
     assert_equal "Invalid Input", decrypt3
   end
 
+  def test_it_can_build_output_hash
+    expected = {
+                encryption: "whatever",
+                key: "12345",
+                date: "76543"
+                }
+
+    expected2 = {
+                decryption: "whatever",
+                key: "12345",
+                date: "76543"
+                }
+
+    assert_equal expected, @enigma.output_hash("whatever", "12345", "76543")
+    assert_equal expected2, @enigma.output_hash("whatever", "12345", "76543", :decryption)
+  end
+
+  def test_it_can_generate_random_number
+    assert_equal 1, @enigma.random_number.length
+    assert_instance_of String, @enigma.random_number
+    assert_equal true, ("0".."9").include?(@enigma.random_number)
+  end
+
+  def test_it_can_collect_a_random_key_of_five_numbers
+    assert_equal 5, @enigma.random_five.length
+    assert_instance_of String, @enigma.random_five
+    assert_equal true, ("0".."9").include?(@enigma.random_five[0])
+    assert_equal true, ("0".."9").include?(@enigma.random_five[1])
+    assert_equal true, ("0".."9").include?(@enigma.random_five[2])
+    assert_equal true, ("0".."9").include?(@enigma.random_five[3])
+    assert_equal true, ("0".."9").include?(@enigma.random_five[4])
+  end
+
+  def test_that_it_can_put_gather_todays_date_in_ddmmyy_format
+    Date.stubs(:today).returns(Date.new(2020, 02, 29))
+    assert_equal "290220", @enigma.todays_date
+  end
+
+  def test_it_can_return_the_year_in_ddmmyy
+    assert_equal "18", @enigma.year("111218")
+  end
+
+  def test_it_can_return_the_month_in_ddmmyy
+    assert_equal "12", @enigma.month("111218")
+  end
+
+  def test_it_can_return_the_day_in_ddmmyy
+    assert_equal "11", @enigma.day("111218")
+  end
+
+  def test_it_can_validate_date_input
+    good_input = "300388"
+    bad_input2 = "320388"
+    bad_input3 = "301388"
+    bad_input4 = "301S88"
+    bad_input5 = "30388"
+    bad_input6 = "3003$8"
+
+    assert_equal true, @enigma.valid_date?(good_input)
+    assert_equal false, @enigma.valid_date?(bad_input2)
+    assert_equal false, @enigma.valid_date?(bad_input3)
+    assert_equal false, @enigma.valid_date?(bad_input4)
+    assert_equal false, @enigma.valid_date?(bad_input5)
+    assert_equal false, @enigma.valid_date?(bad_input6)
+  end
+
+  def test_it_can_validate_key_input
+    good_input = "07896"
+    bad_input2 = "0789"
+    bad_input3 = "078961"
+    bad_input4 = "07S96"
+    bad_input5 = "$7896"
+
+    assert_equal true, @enigma.valid_key?(good_input)
+    assert_equal false, @enigma.valid_key?(bad_input2)
+    assert_equal false, @enigma.valid_key?(bad_input3)
+    assert_equal false, @enigma.valid_key?(bad_input4)
+    assert_equal false, @enigma.valid_key?(bad_input5)
+  end
+
+  def test_it_can_validate_inputs
+    assert_equal true, @enigma.valid_inputs?("Hello", "12345", "121212")
+    assert_equal false, @enigma.valid_inputs?(:Hello, "12345", "121212")
+    assert_equal false, @enigma.valid_inputs?("Hello", "1234", "121212")
+    assert_equal false, @enigma.valid_inputs?("Hello", "12345", "1121212")
+    assert_equal false, @enigma.valid_inputs?("Hello", "12345", "12121S")
+    assert_equal false, @enigma.valid_inputs?("Hello", "1S345", "12121")
+    assert_equal false, @enigma.valid_inputs?(true, "12345", "121212")
+  end
+
   def test_it_can_use_default_todays_date_for_encryption
     @enigma.stubs(:todays_date).returns("010320")
 
@@ -144,9 +162,9 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.decrypt("lib sdmcvpu", "02715")
   end
 
-  def test_it_can_use_random_number_and_todays_date_as_defults_for_encrypt
+  def test_it_can_use_random_five_and_todays_date_as_defults_for_encrypt
     @enigma.stubs(:todays_date).returns("010320")
-    @enigma.stubs(:random_number).returns("08351")
+    @enigma.stubs(:random_five).returns("08351")
 
     expected = {encryption: "rktiyfdlarl", key: "08351", date: "010320"}
 
