@@ -14,11 +14,6 @@ class KeyProcessorTest < Minitest::Test
 
   def test_it_has_attributes
     assert_equal "02715", @key_processor.input_key
-    assert_equal [:a, :b, :c, :d], @key_processor.keys
-  end
-
-  def test_it_can_split_the_key_input_into_an_array
-    assert_equal ["0", "2", "7", "1", "5"], @key_processor.split_input
   end
 
   def test_it_can_create_an_array_of_pairs
@@ -31,7 +26,7 @@ class KeyProcessorTest < Minitest::Test
                 c: 71,
                 d: 15}
 
-    assert_equal expected, @key_processor.process_key
+    assert_equal expected, @key_processor.output_hash
   end
 
 end

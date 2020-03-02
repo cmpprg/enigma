@@ -1,15 +1,16 @@
 require "./lib/key_processor"
 require "./lib/date_processor"
-class MessageProcessor
+require "./lib/processor"
+class MessageProcessor < Processor
 
-  attr_reader :alphabet, :key_shift_values, :offset_shift_values,
+  attr_reader :key_shift_values, :offset_shift_values,
               :message, :is_decryption
   def initialize(message, key, date)
-    @alphabet = [*"a".."z"] << " "
-    @key_shift_values = KeyProcessor.new(key).process_key
-    @offset_shift_values = DateProcessor.new(date).process_date
+    @key_shift_values = KeyProcessor.new(key).output_hash
+    @offset_shift_values = DateProcessor.new(date).output_hash
     @message = message
     @is_decryption = false
+    super()
   end
 
   def is_decryption?
@@ -26,16 +27,12 @@ class MessageProcessor
     end
   end
 
-  def split_message
-    message.split("")
-  end
-
   def shift_input(string, amount)
     string.tr(alphabet.to_s, alphabet.rotate(amount).to_s)
   end
 
   def process_message
-    split_message.each_with_index.with_object([]) do |(char, index), new_msg|
+    split(message).each_with_index.with_object([]) do |(char, index), new_msg|
       if @alphabet.include?(char)
         new_msg << shift_input(char, total_shifts[:a]) if index % 4 == 0
         new_msg << shift_input(char, total_shifts[:b]) if index % 4 == 1
