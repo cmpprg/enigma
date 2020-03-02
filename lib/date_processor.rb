@@ -1,9 +1,11 @@
-class DateProcessor
+require "./lib/processor"
+
+class DateProcessor < Processor
 
   attr_reader :input_date, :offset_keys
   def initialize(input_date)
     @input_date = input_date
-    @offset_keys = [*"a".."d"].map(&:to_sym)
+    super()
   end
 
   def square_date
@@ -14,16 +16,11 @@ class DateProcessor
     square_date[-4, 4]
   end
 
-  def split_digits
-    last_four_digits.split("")
-  end
-
   def offsets_to_integers
-    split_digits.map(&:to_i)
+    split(last_four_digits).map(&:to_i)
   end
 
-  def process_date
-    @offset_keys.zip(offsets_to_integers).to_h
+  def output_hash
+    process_to_hash(create_sym_keys(4), offsets_to_integers)
   end
-
 end

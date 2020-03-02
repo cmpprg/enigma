@@ -46,4 +46,9 @@ class ProcessorTest < Minitest::Test
 
     assert_equal expected, @processor.process_to_hash(keys, values)
   end
+
+  def test_it_can_create_symbolic_keys_of_a_given_quantity
+    assert_equal [:a, :b, :c, :d, :e], @processor.create_sym_keys(5)
+    assert_equal [:a, :b, :c, :d, :e, :f, :g], @processor.create_sym_keys(7)
+  end
 end

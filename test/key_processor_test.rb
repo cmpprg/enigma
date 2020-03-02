@@ -20,10 +20,6 @@ class KeyProcessorTest < Minitest::Test
     assert_equal [02, 27, 71, 15], @key_processor.create_pairs
   end
 
-  def test_it_can_create_keys
-    assert_equal [:a, :b, :c, :d], @key_processor.create_keys
-  end
-
   def test_it_can_process_key_and_output_hash
     expected = {a: 2,
                 b: 27,

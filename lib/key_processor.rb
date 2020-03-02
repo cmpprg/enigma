@@ -14,11 +14,7 @@ class KeyProcessor < Processor
     end
   end
 
-  def create_keys
-    @alphabet.first(4).map(&:to_sym)
-  end
-
   def output_hash
-    process_to_hash(create_keys, create_pairs)
+    process_to_hash(create_sym_keys(4), create_pairs)
   end
 end
